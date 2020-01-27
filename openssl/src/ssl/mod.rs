@@ -2229,6 +2229,18 @@ impl SslSessionRef {
         }
     }
 
+    /// Determains whether the session can be used for resumption.
+    ///
+    /// Requires OpenSSL 1.1.1 or newer.
+    ///
+    /// This corresponds to [`SSL_SESSION_is_resumable`].
+    ///
+    /// [`SSL_SESSION_is_resumable`]: https://www.openssl.org/docs/man1.1.1/man3/SSL_SESSION_is_resumable.html
+    #[cfg(ossl111)]
+    pub fn is_resumable(&self) -> bool {
+        unsafe { ffi::SSL_SESSION_is_resumable(self.as_ptr()) != 0 }
+    }
+
     to_der! {
         /// Serializes the session into a DER-encoded structure.
         ///

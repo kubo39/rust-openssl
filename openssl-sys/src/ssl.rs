@@ -954,6 +954,8 @@ extern "C" {
     pub fn SSL_SESSION_set_max_early_data(ctx: *mut SSL_SESSION, max_early_data: u32) -> c_int;
     #[cfg(ossl111)]
     pub fn SSL_SESSION_get_max_early_data(ctx: *const SSL_SESSION) -> u32;
+    #[cfg(ossl111)]
+    pub fn SSL_SESSION_is_resumable(s: *const SSL_SESSION) -> c_int;
 
     pub fn SSL_SESSION_get_id(s: *const SSL_SESSION, len: *mut c_uint) -> *const c_uchar;
     #[cfg(any(ossl110, libressl273))]
